@@ -67,7 +67,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void blockLogic() {
 		if (blockcounter == 7) {
 			addBlock();
-		blockcounter = 0;
+	//	blockcounter = 0;
 		}
 		blockcounter++;
 	}

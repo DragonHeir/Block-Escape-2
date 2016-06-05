@@ -90,37 +90,12 @@ public class PlayerObject implements ActionListener {
 		}
 		if (keySpace) {
 			if (isJumping == false) {
-				new Thread(new SoundPlayer("Jump2.wav")).start();
+//				new Thread(new SoundPlayer("Jump2.wav")).start();
 				currentVelocity = jumpForce;
 				isJumping = true;
 			}
 		}
-		if (isJumping) {
-			if (!isColliding(blocks)) {
-				y += currentVelocity;
-				if (currentVelocity < 0) {
-					cBox.y = y + currentVelocity;
-					if (!isColliding(blocks)) {
-						y += currentVelocity;
-					} else {
-						cBox.y = y;
-						currentVelocity = 0;
-					}
-					y += currentVelocity;
-					if (currentVelocity > 0) {
-						cBox.y = y - currentVelocity;
-						if (!isColliding(blocks)) {
-							y -= currentVelocity;
-						} else {
-							cBox.y = y;
-							currentVelocity = 0;
-						}
-				}
-			}
-			if (y == 480 - 16) {
-				isJumping = false;
-			}
-		}
+		
 
 	
 
@@ -145,8 +120,50 @@ public class PlayerObject implements ActionListener {
 		if (currentVelocity >= maximumVelocity) {
 			currentVelocity = maximumVelocity;
 		}
+		if (isJumping) {
+			if (!isColliding(blocks)) {
+				y += currentVelocity;
+				cBox.y += currentVelocity;
+				if (currentVelocity < 0) {
+					cBox.y = y + currentVelocity;
+					if (!isColliding(blocks)) {
+						
+					} else {
+						cBox.y = y;
+						currentVelocity = 0;
+					}
+					if (currentVelocity > 0) {
+						cBox.y = y + currentVelocity;
+						if (!isColliding(blocks)) {
+							
+						} else {
+							cBox.y = y;
+							currentVelocity = 0;
+						}
+				}
+			}
+			if (y == 480 - 16) {
+				isJumping = false;
+				y = 464;
+				cBox.y = y;
+			}
+		}
+			if (isColliding(blocks)){
+				y--;
+				cBox.y = y;
+			}
+		}
+		if (x <= 0) {
+			x = 0;
+			cBox.x = x;
+		}
+		if (x >= 240)
+		{
+			x = 240;
+			cBox.x = x;
+		}
 	}
-	}
+
 
 	public void paint(Graphics g) {
 		g.drawImage(image, x, y, width, height, null);
