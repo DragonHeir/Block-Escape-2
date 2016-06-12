@@ -90,16 +90,11 @@ public class PlayerObject implements ActionListener {
 		}
 		if (keySpace) {
 			if (isJumping == false) {
-//				new Thread(new SoundPlayer("Jump2.wav")).start();
+				// new Thread(new SoundPlayer("Jump2.wav")).start();
 				currentVelocity = jumpForce;
 				isJumping = true;
 			}
 		}
-		
-
-	
-
-	
 
 		if (currentState == leftState) {
 			cBox.x = x - speed;
@@ -120,6 +115,10 @@ public class PlayerObject implements ActionListener {
 		if (currentVelocity >= maximumVelocity) {
 			currentVelocity = maximumVelocity;
 		}
+		cBox.y = y;
+		if(!isColliding(blocks)){
+			isJumping = true;
+		}
 		if (isJumping) {
 			if (!isColliding(blocks)) {
 				y += currentVelocity;
@@ -127,7 +126,7 @@ public class PlayerObject implements ActionListener {
 				if (currentVelocity < 0) {
 					cBox.y = y + currentVelocity;
 					if (!isColliding(blocks)) {
-						
+
 					} else {
 						cBox.y = y;
 						currentVelocity = 0;
@@ -135,40 +134,44 @@ public class PlayerObject implements ActionListener {
 					if (currentVelocity > 0) {
 						cBox.y = y + currentVelocity;
 						if (!isColliding(blocks)) {
-							
+
 						} else {
 							cBox.y = y;
 							currentVelocity = 0;
 						}
+					}
 				}
 			}
-			if (y == 480 - 16) {
+			if (isColliding(blocks)) {
+				while (isColliding(blocks))
+				{
+					y--;
+					cBox.y = y;
+				}
 				isJumping = false;
-				y = 464;
-				cBox.y = y;
+				currentVelocity = 0;
 			}
 		}
-			if (isColliding(blocks)){
-				y--;
-				cBox.y = y;
-			}
+		if (y >= 480 - 16) {
+			System.out.println("detect floor");
+			y = 464;
+			cBox.y = y;
+			isJumping = false;
 		}
 		if (x <= 0) {
 			x = 0;
 			cBox.x = x;
 		}
-		if (x >= 240)
-		{
+		if (x >= 240) {
 			x = 240;
 			cBox.x = x;
 		}
 	}
 
-
 	public void paint(Graphics g) {
 		g.drawImage(image, x, y, width, height, null);
 		g.setColor(Color.RED);
-		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
+		//g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 	}
 
 	public void actionPerformed(ActionEvent e) {
