@@ -19,6 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	BlockObject bg;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
+	Player2Object player2;
 
 	public void paint(Graphics g) {
 		bg.paint(g);
@@ -26,12 +27,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			block.paint(g);
 		}
 		player.paint(g);
+		player2.paint(g);
+		
 	}
 
 	public GamePanel() {
 		bg = new BlockObject(0, 0, 256, 480, "Background.png");
 		blocks = new ArrayList<BlockObject>();
 		player = new PlayerObject(128, 464, 16, 16, "Player.png");
+		player2 = new Player2Object(128, 464, 16, 16, "Player.png");
 		blocktimer = new Timer(1000 / 20, this);
 		blocktimer.start();
 	}
@@ -47,8 +51,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 		player.PlayerCollisionDetection(blocks);
+		player2.PlayerCollisionDetection(blocks);
 		//checkPlayerCollision(blocks);
 		player.refresh(blocks);
+		player2.refresh(blocks);
 		repaint();
 		blockLogic();
 	}
@@ -103,23 +109,31 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 					player.isJumping = false;				
 			}
 		}
+			if (player2.cBox.intersects(b.getBox())) {
+				if (player2.isJumping) {
+					player2.isJumping = false;				
+			}
+		}
 		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
 		player.keyTyped(e);
+		player2.keyTyped(e);
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		player.keyPressed(e);
+		player2.keyPressed(e);
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		player.keyReleased(e);
+		player2.keyReleased(e);
 
 	}
 }

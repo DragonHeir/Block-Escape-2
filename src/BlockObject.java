@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -14,7 +15,7 @@ public class BlockObject
 	int width;
 	int height;
 	BufferedImage image;
-	Rectangle cBox;
+	public Rectangle cBox;
 	boolean isFalling = true;
 
 	BlockObject(int x, int y, int width, int height, String image)
@@ -36,6 +37,8 @@ public class BlockObject
 	}
 	public void paint(Graphics g)
 	{
+		g.setColor(Color.BLUE);
+		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 		g.drawImage(image, x, y, width, height, null);
 	}
 	public void refresh()

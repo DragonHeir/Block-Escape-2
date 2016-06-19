@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-public class PlayerObject implements ActionListener {
+public class Player2Object implements ActionListener {
 	int speed;
 
 	public int x;
@@ -33,7 +33,7 @@ public class PlayerObject implements ActionListener {
 	int maximumVelocity = 9;
 	int jumpForce = -9;
 
-	PlayerObject(int x, int y, int width, int height, String image) {
+	Player2Object(int x, int y, int width, int height, String image) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -182,13 +182,13 @@ public class PlayerObject implements ActionListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_A) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			keyA = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			keyD = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			keySpace = true;
 		}
 
@@ -196,13 +196,13 @@ public class PlayerObject implements ActionListener {
 
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_A) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			keyA = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_D) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			keyD = false;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			keySpace = false;
 		}
 }
