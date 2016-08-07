@@ -8,8 +8,9 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class BlockObject
+public class ImageObject
 {
+	long startTime = -1;
 	int x;
 	int y;
 	int width;
@@ -18,8 +19,9 @@ public class BlockObject
 	public Rectangle cBox;
 	boolean isFalling = true;
 
-	BlockObject(int x, int y, int width, int height, String image)
+	ImageObject(int x, int y, int width, int height, String image)
 	{
+		
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -37,9 +39,12 @@ public class BlockObject
 	}
 	public void paint(Graphics g)
 	{
-//		g.setColor(Color.BLUE);
-//		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
-		g.drawImage(image, x, y, width, height, null);
+		if (startTime == -1) {
+			startTime = System.currentTimeMillis();
+		}
+		if (System.currentTimeMillis() - startTime <= 3000) {
+			g.drawImage(image, x, y, width, height, null);
+		}
 	}
 	public void refresh()
 	{

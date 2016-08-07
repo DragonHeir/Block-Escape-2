@@ -17,6 +17,8 @@ public class GamePanel2 extends JPanel implements ActionListener, KeyListener {
 	Timer blocktimer;
 	Timer playertimer;
 	BlockObject bg;
+	BlockObject fog;
+	ImageObject controls;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
 	Player2Object player2;
@@ -28,14 +30,18 @@ public class GamePanel2 extends JPanel implements ActionListener, KeyListener {
 		}
 		player.paint(g);
 		player2.paint(g);
+		fog.paint(g);
+		controls.paint(g);
 
 	}
 
 	public GamePanel2() {
 		bg = new BlockObject(0, 0, 256, 480, "Background.png");
 		blocks = new ArrayList<BlockObject>();
+		controls = new ImageObject(82, 60, 92, 38, "Controls.png");
 			player = new PlayerObject(128, 464, 16, 16, "Player.png");
-			player2 = new Player2Object(128, 464, 16, 16, "Player.png");
+			player2 = new Player2Object(128, 464, 16, 16, "Player2.png");
+			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
 		blocktimer = new Timer(1000 / 20, this);
 		blocktimer.start();
 	}
@@ -71,9 +77,9 @@ public class GamePanel2 extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void blockLogic() {
-		if (blockcounter == 7) {
+		if (blockcounter == 77) {
 			addBlock();
-			blockcounter = 0;
+			blockcounter = 70;
 		}
 		blockcounter++;
 	}
