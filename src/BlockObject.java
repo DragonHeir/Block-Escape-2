@@ -17,6 +17,8 @@ public class BlockObject
 	BufferedImage image;
 	public Rectangle cBox;
 	boolean isFalling = true;
+	float val = 0.0f;
+	int val2 = 0;
 
 	BlockObject(int x, int y, int width, int height, String image)
 	{
@@ -41,6 +43,17 @@ public class BlockObject
 //		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 		g.drawImage(image, x, y, width, height, null);
 	}
+	public void scroll() {
+//		if (!isFalling){
+			val = val + 0.2f;
+			y = (int) (y + val);
+			cBox.y = (int) (cBox.y + val);
+		if (val >= 1) {
+			val = 0.0f;
+			val2 = val2 + 1;
+		}
+		}
+//	}
 	public void refresh()
 	{
 		if (isFalling)

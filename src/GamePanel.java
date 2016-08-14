@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	ImageObject controls;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
+	boolean isScrolling = false;
 
 	public void paint(Graphics g) {
 		bg.paint(g);
@@ -57,6 +58,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		player.refresh(blocks);
 		repaint();
 		blockLogic();
+		scroll();
+	}
+
+	public void scroll() {
+	if (player.y <= 460)
+	{
+		isScrolling = true;
+		System.out.println("scroll");
+	}
+	if (isScrolling) {		
+		for(BlockObject block : blocks){
+			block.scroll();
+		}
+	}
+		
 	}
 
 	int block() {
@@ -69,12 +85,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void addBlock() {
 		blocks.add(new BlockObject(block(), 0, 16, 16, "block.png"));
 	}
-	public void controls() {
-		if (blockcounter == 77)
-		{
-			
-		}
-	}
 	public void blockLogic() {
 		if (blockcounter == 77) {
 			addBlock();
@@ -86,6 +96,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean isFalling() {
 		return isFalling;
 	}
+	
+	
 
 	public void checkCollision() {
 		for (int i = 0; i < blocks.size(); i++) {
