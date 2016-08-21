@@ -15,14 +15,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	int x = 5;
 	int blockcounter = 0;
 	Timer blocktimer;
-	Timer playertimer;
+	Timer scrolltimer;
 	BlockObject bg;
 	BlockObject fog;
 	ImageObject controls;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
 	boolean isScrolling = false;
+	int h = 0;
 
+
+	public GamePanel() {
+		bg = new BlockObject(0, 0, 256, 480, "Background.png");
+		controls = new ImageObject(82, 60, 92, 38, "Controls.png");
+		blocks = new ArrayList<BlockObject>();
+			player = new PlayerObject(128, 464, 16, 16, "Player.png");
+			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
+		blocktimer = new Timer((int) 3.125, this);
+		blocktimer.start();
+	}
 	public void paint(Graphics g) {
 		bg.paint(g);
 		for (BlockObject block : blocks) {
@@ -31,16 +42,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		player.paint(g);
 		fog.paint(g);
 		controls.paint(g);
-	}
-
-	public GamePanel() {
-		bg = new BlockObject(0, 0, 256, 480, "Background.png");
-		controls = new ImageObject(82, 60, 92, 38, "Controls.png");
-		blocks = new ArrayList<BlockObject>();
-			player = new PlayerObject(128, 464, 16, 16, "Player.png");
-			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
-		blocktimer = new Timer(1000 / 20, this);
-		blocktimer.start();
 	}
 
 	@Override
@@ -55,21 +56,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		player.PlayerCollisionDetection(blocks);
 		// checkPlayerCollision(blocks);
-		player.refresh(blocks);
-		repaint();
-		blockLogic();
-		scroll();
+		player.refresh(blocks);		
+			repaint();
+			blockLogic();
+			scroll();
 	}
 
 	public void scroll() {
-	if (player.y <= 460)
+	if (player.y <= 320)
 	{
 		isScrolling = true;
 		System.out.println("scroll");
 	}
 	if (isScrolling) {		
 		for(BlockObject block : blocks){
-			block.scroll();
+//			block.scroll();
 		}
 	}
 		
@@ -83,12 +84,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void addBlock() {
-		blocks.add(new BlockObject(block(), 0, 16, 16, "block.png"));
+		blocks.add(new BlockObject(block(), h, 16, 16, "block.png"));
 	}
 	public void blockLogic() {
-		if (blockcounter == 77) {
+		if (blockcounter == 1232) {
 			addBlock();
-			blockcounter = 70;
+			blockcounter = 1120;
 		}
 		blockcounter++;
 	}

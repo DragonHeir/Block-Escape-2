@@ -43,29 +43,29 @@ public class BlockObject
 //		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 		g.drawImage(image, x, y, width, height, null);
 	}
-	public void scroll() {
+//	public void scroll() {
 //		if (!isFalling){
-			val = val + 0.2f;
-			y = (int) (y + val);
-			cBox.y = (int) (cBox.y + val);
-		if (val >= 1) {
-			val = 0.0f;
-			val2 = val2 + 1;
-		}
-		}
+//			val = val + 0.2f;
+//			y = (int) (y + val);
+//			cBox.y = (int) (cBox.y + val);
+//		if (val >= 1) {
+//			val = 0.0f;
+//			val2 = val2 + 1;
+//		}
+//		}
 //	}
 	public void refresh()
 	{
 		if (isFalling)
 		{
-		y = y + 16;
+		y = y + 1;
 		if(y >= 480 - 16)
 		{
 			y = 480 - 16;
 			isFalling = false;
 		}
 		else{
-		cBox.setBounds(x, y + 16, width, height);
+		cBox.setBounds(x, y + 1, width, height);
 		}}
 		else
 		{			
@@ -123,7 +123,7 @@ public class BlockObject
 				continue;
 			}
 			else if(cBox.intersects(b.getBox()))
-			{
+			{	
 				isFalling = false;
 			}
 	}

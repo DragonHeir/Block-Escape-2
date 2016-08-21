@@ -38,7 +38,7 @@ public class PlayerObject implements ActionListener {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		speed = 8;
+		speed = (int) 1;
 		isFalling = true;
 		try {
 			this.image = ImageIO.read(this.getClass().getResourceAsStream(image));
