@@ -39,33 +39,33 @@ public class BlockObject
 	}
 	public void paint(Graphics g)
 	{
-//		g.setColor(Color.BLUE);
-//		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
+		g.setColor(Color.BLUE);
+		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 		g.drawImage(image, x, y, width, height, null);
 	}
-//	public void scroll() {
-//		if (!isFalling){
-//			val = val + 0.2f;
-//			y = (int) (y + val);
-//			cBox.y = (int) (cBox.y + val);
-//		if (val >= 1) {
+	public void scroll() {
+		if (!isFalling){
+//			val = val + 0.1f;
+//		if (val >= 8) {
+			cBox.y = (int) (cBox.y + 1);
+			y = (int) (y + 1);
 //			val = 0.0f;
 //			val2 = val2 + 1;
+		}
 //		}
-//		}
-//	}
+	}
 	public void refresh()
 	{
 		if (isFalling)
 		{
-		y = y + 1;
+		y = y + 8;
 		if(y >= 480 - 16)
 		{
 			y = 480 - 16;
 			isFalling = false;
 		}
 		else{
-		cBox.setBounds(x, y + 1, width, height);
+		cBox.setBounds(x, y + 8, width, height);
 		}}
 		else
 		{			

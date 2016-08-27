@@ -32,13 +32,15 @@ public class PlayerObject implements ActionListener {
 	int currentVelocity = 0;
 	int maximumVelocity = 9;
 	int jumpForce = -9;
+	float val = 0.0f;
+	int val2 = 0;
 
 	PlayerObject(int x, int y, int width, int height, String image) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		speed = (int) 1;
+		speed = (int) 8;
 		isFalling = true;
 		try {
 			this.image = ImageIO.read(this.getClass().getResourceAsStream(image));

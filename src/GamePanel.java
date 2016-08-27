@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		blocks = new ArrayList<BlockObject>();
 			player = new PlayerObject(128, 464, 16, 16, "Player.png");
 			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
-		blocktimer = new Timer((int) 3.125, this);
+		blocktimer = new Timer((int) 50, this);
 		blocktimer.start();
 	}
 	public void paint(Graphics g) {
@@ -63,14 +63,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void scroll() {
-	if (player.y <= 320)
+	if (player.y <= 460)
 	{
 		isScrolling = true;
-		System.out.println("scroll");
+//		System.out.println("scroll");
 	}
 	if (isScrolling) {		
 		for(BlockObject block : blocks){
-//			block.scroll();
+			block.scroll();
 		}
 	}
 		
@@ -87,9 +87,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		blocks.add(new BlockObject(block(), h, 16, 16, "block.png"));
 	}
 	public void blockLogic() {
-		if (blockcounter == 1232) {
+		if (blockcounter == 77) {
 			addBlock();
-			blockcounter = 1120;
+			blockcounter = 70;
 		}
 		blockcounter++;
 	}
