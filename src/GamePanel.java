@@ -23,11 +23,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	PlayerObject player;
 	boolean isScrolling = false;
 	int h = 0;
+	long startTime;
 
 
 	public GamePanel() {
 		bg = new BlockObject(0, 0, 256, 480, "Background.png");
-		controls = new ImageObject(82, 60, 92, 38, "Controls.png");
+		controls = new ImageObject(82, 60, 92, 27, "Controls.png");
 		blocks = new ArrayList<BlockObject>();
 			player = new PlayerObject(128, 464, 16, 16, "Player.png");
 			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
@@ -53,28 +54,41 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 
 		}
-
-		player.PlayerCollisionDetection(blocks);
-		// checkPlayerCollision(blocks);
-		player.refresh(blocks);		
+		
+		if (startTime == -1){
+			startTime = System.currentTimeMillis();
+		}
+		if (player.y <= 320){
+			
+			if (System.currentTimeMillis() - startTime >= 3000){
+				for (BlockObject block : blocks) {
+					block.setY(block.getY() + 16);
+				}
+				startTime = System.currentTimeMillis();
+			}
+		}
+			
+			player.PlayerCollisionDetection(blocks);
+			// checkPlayerCollision(blocks);
+			player.refresh(blocks);		
 			repaint();
 			blockLogic();
-			scroll();
-	}
-
-	public void scroll() {
-	if (player.y <= 460)
-	{
-		isScrolling = true;
-//		System.out.println("scroll");
-	}
-	if (isScrolling) {		
-		for(BlockObject block : blocks){
-			block.scroll();
+//			scroll();
 		}
-	}
+
+//	public void scroll() {
+//	if (player.y <= 460)
+//	{
+//		isScrolling = true;
+////		System.out.println("scroll");
+//	}
+//	if (isScrolling) {		
+//		for(BlockObject block : blocks){
+////			block.scroll();
+//		}
+//	}
 		
-	}
+//	}
 
 	int block() {
 		Random r = new Random();
