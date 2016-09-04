@@ -29,7 +29,7 @@ public class PlayerObject implements ActionListener {
 	private BufferedImage image;
 	public Rectangle cBox;
 	boolean PlayerCollision = false;
-	boolean PlayerDeath = false;
+	public static boolean PlayerDeath = false;
 	int currentVelocity = 0;
 	int maximumVelocity = 9;
 	int jumpForce = -9;
@@ -60,12 +60,11 @@ public class PlayerObject implements ActionListener {
 			}
 			if (b.getDeathBox().intersects(cBox)) {
 				PlayerDeath = true;
-				System.out.println("dead");
-			}
-			else {
-				PlayerDeath = false;
 			}
 		}
+	}
+	public boolean getPlayerDeath(){
+		return PlayerDeath;
 	}
 
 	public boolean isColliding(ArrayList<BlockObject> blocks) {

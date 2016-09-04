@@ -8,7 +8,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class ImageObject
+public class Control
 {
 	long startTime = -1;
 	int x;
@@ -19,7 +19,7 @@ public class ImageObject
 	public Rectangle cBox;
 	boolean isFalling = true;
 
-	ImageObject(int x, int y, int width, int height, String image)
+	Control(int x, int y, int width, int height, String image)
 	{
 		
 		this.x = x;

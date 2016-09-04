@@ -18,7 +18,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer scrolltimer;
 	BlockObject bg;
 	BlockObject fog;
-	ImageObject controls;
+	Control controls;
+	Control deaded;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
 	boolean isScrolling = false;
@@ -28,25 +29,37 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public GamePanel() {
 		bg = new BlockObject(0, 0, 256, 480, "Background.png");
-		controls = new ImageObject(82, 60, 92, 27, "Controls.png");
+		controls = new Control(82, 60, 92, 27, "Controls.png");
 		blocks = new ArrayList<BlockObject>();
 			player = new PlayerObject(128, 464, 16, 16, "Player.png");
 			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
+			deaded = new Control(82, 60, 111, 27, "You Died.png");
 		blocktimer = new Timer((int) 50, this);
 		blocktimer.start();
+	}
+	public void CheckDeath() {
+		if (PlayerObject.PlayerDeath){
+			System.out.println("you died");
+			blocks.clear();
+			
+		}
 	}
 	public void paint(Graphics g) {
 		bg.paint(g);
 		for (BlockObject block : blocks) {
 			block.paint(g);
 		}
-		player.paint(g);
+		if (!PlayerObject.PlayerDeath){			
+			player.paint(g);
+		}
 		fog.paint(g);
 		controls.paint(g);
+		deaded.paint(g);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		CheckDeath();
 		for (BlockObject block : blocks) {
 			if (block.isFalling) {
 				block.checkCollision(blocks);
