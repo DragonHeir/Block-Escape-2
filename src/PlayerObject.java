@@ -51,6 +51,8 @@ public class PlayerObject implements ActionListener {
 		cBox = new Rectangle(x, y, width, height);
 	}
 
+	
+	
 	public void PlayerCollisionDetection(ArrayList<BlockObject> blocks) {
 		for (BlockObject b : blocks) {
 			if (b.getBox().intersects(cBox)) {
@@ -102,7 +104,6 @@ public class PlayerObject implements ActionListener {
 		}
 		if (keySpace) {
 			if (isJumping == false) {
-				// new Thread(new SoundPlayer("Jump2.wav")).start();
 				currentVelocity = jumpForce;
 				isJumping = true;
 			}
@@ -181,8 +182,8 @@ public class PlayerObject implements ActionListener {
 
 	public void paint(Graphics g) {
 		g.drawImage(image, x, y, width, height, null);
-		g.setColor(Color.RED);
-		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
+//		g.setColor(Color.RED);
+//		g.drawRect(cBox.x, cBox.y, cBox.width, cBox.height);
 	}
 
 	public void actionPerformed(ActionEvent e) {

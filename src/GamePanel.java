@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	BlockObject bg;
 	BlockObject fog;
 	Control controls;
-	Control deaded;
+	Deathmsg deaded;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
 	boolean isScrolling = false;
@@ -33,18 +33,25 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		blocks = new ArrayList<BlockObject>();
 			player = new PlayerObject(128, 464, 16, 16, "Player.png");
 			fog = new BlockObject(0, 0, 256, 300, "Fog.png");
-			deaded = new Control(82, 60, 111, 27, "You Died.png");
+			deaded = new Deathmsg(73, 60, 111, 27, "You Died.png");
 		blocktimer = new Timer((int) 50, this);
 		blocktimer.start();
 	}
+	
+	
+	//this is where the checkdeath function is defined
+	//Use: This is function is defined here, so that
 	public void CheckDeath() {
 		if (PlayerObject.PlayerDeath){
-			System.out.println("you died");
+//			System.out.println("you died");
 			blocks.clear();
 			
 		}
 	}
-	public void paint(Graphics g) {
+	
+	//
+	public void paint(Graphics g) 
+	{
 		bg.paint(g);
 		for (BlockObject block : blocks) {
 			block.paint(g);
@@ -53,13 +60,19 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			player.paint(g);
 		}
 		fog.paint(g);
+		if (PlayerObject.PlayerDeath){
+			deaded.paint(g);
+		}
 		controls.paint(g);
-		deaded.paint(g);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CheckDeath();
+		CheckDeath();  //this is a method call, the method was defined on the gamepanel object (which is this object)
+		
+		
+		
 		for (BlockObject block : blocks) {
 			if (block.isFalling) {
 				block.checkCollision(blocks);
@@ -71,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (startTime == -1){
 			startTime = System.currentTimeMillis();
 		}
-		if (player.y <= 320){
+		if (player.y <= 240){
 			
 			if (System.currentTimeMillis() - startTime >= 3000){
 				for (BlockObject block : blocks) {
@@ -81,7 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			}
 		}
 			
-			player.PlayerCollisionDetection(blocks);
+			player.PlayerCollisionDetection(blocks);//checks for player collision
 			// checkPlayerCollision(blocks);
 			player.refresh(blocks);		
 			repaint();
