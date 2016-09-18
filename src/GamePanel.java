@@ -7,7 +7,11 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
@@ -22,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Deathmsg deaded;
 	ArrayList<BlockObject> blocks;
 	PlayerObject player;
+	int score = -7;
 	boolean isScrolling = false;
 	int h = 0;
 	long startTime;
@@ -66,6 +71,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		controls.paint(g);
 		
 	}
+	public void score(){
+		if (System.currentTimeMillis() - startTime >= 1000){			
+			score = score + 1;
+			System.out.println(score);
+			startTime = System.currentTimeMillis();
+		}
+		if (PlayerObject.PlayerDeath){	
+			JOptionPane.showMessageDialog(null, "Your score was "+score+"!");
+		}
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -99,6 +115,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			player.refresh(blocks);		
 			repaint();
 			blockLogic();
+			score();
 //			scroll();
 		}
 
