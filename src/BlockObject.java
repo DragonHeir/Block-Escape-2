@@ -47,7 +47,7 @@ public class BlockObject
 		g.drawImage(image, x, y, width, height, null);
 	}
 //	public void scroll() {
-////		if (!isFalling){
+//		if (!isFalling){
 //			val = val + 0.1f;
 //		if (val >= 8) {
 //			cBox.y = (int) (cBox.y + 16);

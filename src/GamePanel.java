@@ -30,6 +30,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	boolean isScrolling = false;
 	int h = 0;
 	long startTime;
+	long startTime2;
+	long startTime3;
 
 
 	public GamePanel() {
@@ -41,11 +43,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			deaded = new Deathmsg(73, 60, 111, 27, "You Died.png");
 		blocktimer = new Timer((int) 50, this);
 		blocktimer.start();
+
 	}
 	
 	
 	//this is where the checkdeath function is defined
 	//Use: This is function is defined here, so that
+	@SuppressWarnings("deprecation")
 	public void CheckDeath() {
 		if (PlayerObject.PlayerDeath){
 //			System.out.println("you died");
@@ -72,15 +76,21 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	public void score(){
-		if (System.currentTimeMillis() - startTime >= 1000){			
+		if (System.currentTimeMillis() - startTime3 >= 1000){			
 			score = score + 1;
 			System.out.println(score);
-			startTime = System.currentTimeMillis();
+			startTime3 = System.currentTimeMillis();
 		}
 		if (PlayerObject.PlayerDeath){	
 			JOptionPane.showMessageDialog(null, "Your score was "+score+"!");
 		}
 		
+	}
+	public void song(){
+		if (System.currentTimeMillis() - startTime2 >= 102000){
+			new Thread(new SoundObject("655176-The-Blizzard-Loop.wav")).start();
+			startTime2 = System.currentTimeMillis();
+		}
 	}
 
 	@Override
@@ -100,7 +110,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (startTime == -1){
 			startTime = System.currentTimeMillis();
 		}
-		if (player.y <= 240){
+		if (player.y <= 260){
 			
 			if (System.currentTimeMillis() - startTime >= 3000){
 				for (BlockObject block : blocks) {
@@ -116,6 +126,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			repaint();
 			blockLogic();
 			score();
+			song();
 //			scroll();
 		}
 
@@ -123,14 +134,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 //	if (player.y <= 460)
 //	{
 //		isScrolling = true;
-////		System.out.println("scroll");
+//		System.out.println("scroll");
 //	}
 //	if (isScrolling) {		
 //		for(BlockObject block : blocks){
 ////			block.scroll();
 //		}
 //	}
-		
+//		
 //	}
 
 	int block() {
