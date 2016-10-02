@@ -1,3 +1,3 @@
 # Block-Escape-2
-<a href = "https://github.com/DragonHeir/Block-Escape-2/blob/master/Block_Escape.jar?raw=true"> Click here to play my game!
+<a href = "https://drive.google.com/drive/folders/0B_JpDQI3t4nLbUQ1TEFlOXRtUUE?usp=sharing"> Click here to play my game!
 </a>
