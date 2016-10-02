@@ -87,7 +87,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	public void song(){
-		if (System.currentTimeMillis() - startTime2 >= 102000){
+		if (System.currentTimeMillis() - startTime2 >= 102500){
 			new Thread(new SoundObject("655176-The-Blizzard-Loop.wav")).start();
 			startTime2 = System.currentTimeMillis();
 		}
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (startTime == -1){
 			startTime = System.currentTimeMillis();
 		}
-		if (player.y <= 260){
+		if (player.y <= 180){
 			
 			if (System.currentTimeMillis() - startTime >= 3000){
 				for (BlockObject block : blocks) {
@@ -152,7 +152,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void addBlock() {
-		blocks.add(new BlockObject(block(), h, 16, 16, "block.png"));
+		blocks.add(new BlockObject(block(), h, 16, 16, "Block.png"));
 	}
 	public void blockLogic() {
 		if (blockcounter == 77) {
